@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>	Crystals Game</title>
+	<link rel="stylesheet" type="text/css" href="hey.css">
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+	<h1> Crystals Collector! </h1>
+	<div>
+	<p id="instructions"> You will be given a random number at the start of the game. <br><br>
+		There are four crystals below. By clicking on a crystal you will add a specific amount of points to your total score. <br><br>
+		You win the game by matching your total score to the random number, you lose the game if your total score goes above the random number. <br><br>
+		the value of each crystal is hidden from you until you click on it. <br><br>
+		Each time when the game starts, the game will change the values of each crystal. <br>	</p>
+	</div>
+	<div>
+	<span id="targetScore" class="card-box"></span>
+
+	
+	<span id="winsandLosses" class="card-box">
+		<p id="wins"> Wins: </p>
+		<p id="losses"> Losses: </p>
+	</span>
+</div>
+<div>
+	<button id="button-1" class="btn" value="Button 1"></button>
+	<button id="button-2" class="btn"></button>
+	<button id="button-3" class="btn"></button>
+	<button id="button-4" class="btn" ></button>
+</div>
+<br> 
+<br>
+<div>
+	<p id="yourtotalscore" class="card-box">Your total score is:</p>
+
+	<br>
+	<br>
+	<div id="totalScore"></div>
+</div>
+
+<script type="text/javascript" >
+$(document).ready(function() {
+	var crys1;
+	var crys2;
+	var crys3;
+	var crys4;
+	var totalScore=0;
+	var wins= 0;
+	var losses= 0;
+	var targetScore;
+	var newScore= 0;
+
+	$("button-1").append("/documents/homework_for_coding_bootcamp/down-arrow-in-small-circle");
+	$("button-2").append("<img src='http://secret-inlet-58421.herokuapp.com/assets/images/green.jpg'>");
+
+	// click events for each of the buttons
+
+	function randomNumberGenerator() {
+		crys1 = Math.floor(Math.random()*9) + 1;
+		crys2 = Math.floor(Math.random()*9) + 1;
+		crys3 = Math.floor(Math.random()*9) + 1;
+		crys4 = Math.floor(Math.random()*9) + 1;
+		// console.log(crys4)
+
+
+	}
+
+	function add(a,b) {
+		var answer = a +b;
+		// return answer;
+	}
+	
+
+	function reset(){
+		randomNumberGenerator();
+	
+	targetScore = Math.floor(Math.random()*100) + 10;
+	$("#targetScore").text(targetScore);
+		totalScore = 0;
+		// crys3 = randomNumberGenerator();
+		// crys4 = randomNumberGenerator();
+
+	// console.log(crys1, crys2, crys3, crys4, "reset function")
+}
+
+	reset();
+
+	$("#button-1").click(function(){
+	
+		totalScore += crys1;
+		$("#yourtotalscore").text("Your total score is:" + totalScore);
+
+		checkScore();
+});
+
+	$("#button-2").click(function(){
+	
+		totalScore+= crys2;
+		$("#yourtotalscore").text("Your total score is: " + totalScore);
+		checkScore();
+
+});
+	$("#button-3").click(function(){
+	
+		totalScore+= crys3;
+		$("#yourtotalscore").text("Your total score is: " + totalScore);
+
+		checkScore();
+});
+	$("#button-4").click(function(){
+			console.log(totalScore, crys4);
+		totalScore+= crys4;
+		$("#yourtotalscore").text("Your total score is: " + totalScore);
+		checkScore();
+	});
+
+	
+
+
+function checkScore() {
+	if(totalScore > targetScore) {
+		losses+=1;
+		$("#losses").text("Losses:" + losses);
+		alert("Sorry, you lost, you are a loser.");
+		reset();
+	} 
+	if (totalScore==targetScore) {
+		wins+=1;
+		$("#wins").text("Wins:" + wins);
+		alert("You won!!!");
+		reset();
+	}
+}
+
+
+	
+
+
+
+
+
+});
+
+
+
+</script>
+</body>
+</html>
